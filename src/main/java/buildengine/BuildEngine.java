@@ -14,11 +14,11 @@ public class BuildEngine {
     private BuildEngine() {}
 
     /** Version: [major].[minor][extra] */
-    public static final String VERSION = "0.1e";
+    public static final String VERSION = "1.0";
     /** Build: [month].[year].[build] */
-    public static final String BUILD = "09.2021.1";
+    public static final String BUILD = "09.2021.15s";
     /** Stable build */
-    public static final boolean stable = false;
+    public static final boolean stable = true;
 
     /** @return A string containing info about the current build */
     public static String welcome() {
@@ -38,9 +38,8 @@ public class BuildEngine {
     }
 
     /**
-     * Creates a new instance of Engine and starts it. Deploys a warning
-     * if on an unstable build.
-     * @param window   The window object to render to
+     * Creates a new instance of Engine and starts it.
+     * @param window   The window object to render to. Use a ImGuiWindow object for console functionality
      * @throws IllegalStateException If there already is another instance of Engine running.
      * @return The created engine
      */
