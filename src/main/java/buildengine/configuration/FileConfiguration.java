@@ -1,6 +1,6 @@
 package buildengine.configuration;
 
-import buildengine.editor.Console;
+import buildengine.core.Console;
 
 import java.io.File;
 import java.io.FileNotFoundException;

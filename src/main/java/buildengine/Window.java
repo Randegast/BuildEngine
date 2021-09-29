@@ -115,6 +115,8 @@ public class Window {
     public static void resizeCallback(long window, int width, int height) {
         if(glfwGetCurrentContext() == window)
             GL12.glViewport(0, 0, width, height);
+        if(BuildEngine.getEngine() == null)
+            return;
         if(BuildEngine.getEngine().getWindow().getId() == window)
             BuildEngine.getEngine().getWindow().size.set(width, height);
         if(BuildEngine.getEngine().getStage() == null)

@@ -1,4 +1,4 @@
-package buildengine.imgui.element;
+package buildengine.editor.imgui.element;
 
 import buildengine.core.scene.director.MonoBehaviour;
 import buildengine.input.Input;
@@ -7,9 +7,7 @@ import buildengine.time.RepeatingEvent;
 import buildengine.time.Scheduler;
 import imgui.ImGui;
 import imgui.flag.ImGuiCol;
-import imgui.flag.ImGuiStyleVar;
 import imgui.flag.ImGuiWindowFlags;
-import imgui.type.ImBoolean;
 import org.lwjgl.glfw.GLFW;
 
 public class Debug extends ImGuiElement implements MonoBehaviour {

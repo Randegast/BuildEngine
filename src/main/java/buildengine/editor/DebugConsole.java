@@ -1,9 +1,9 @@
 package buildengine.editor;
 
 import buildengine.BuildEngine;
-import buildengine.core.scene.Actor;
+import buildengine.core.Console;
 import buildengine.core.scene.director.MonoBehaviour;
-import buildengine.imgui.element.ImGuiElement;
+import buildengine.editor.imgui.element.ImGuiElement;
 import buildengine.input.Input;
 import imgui.ImGui;
 import imgui.ImGuiTextFilter;
@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-import static buildengine.editor.Console.*;
+import static buildengine.core.Console.*;
 
 public class DebugConsole extends ImGuiElement implements MonoBehaviour {
 
@@ -47,15 +47,6 @@ public class DebugConsole extends ImGuiElement implements MonoBehaviour {
         commands = new ArrayList<>();
         commands.addAll(Arrays.asList(
                 new Command("version", "Displays current BuildEngine version.", () -> info(BuildEngine.NAME)),
-                new Command("listactors", "Displays all actors in a scene.", () -> {
-                    info("== Name =========== Active ==");
-                    for (Actor actor : context.getScene().getActors())
-                        info(actor.getName() + " ".repeat(Math.max(0, 21 - actor.getName().length())) +
-                                actor.isActive());
-                    info("=============================");
-                    info(context.getScene().getName() + " contains " + context.getScene().getActors().size() + " actors.");
-                    info("=============================");
-                }),
                 new Command("help", "Displays a list of possible commands", () -> {
                     info("== Command ======================= Info ==");
                     for (Command command : commands) {
@@ -80,6 +71,7 @@ public class DebugConsole extends ImGuiElement implements MonoBehaviour {
         }
     }
 
+    @Override
     public void render() {
         ImGui.setNextWindowSize(520, 600, ImGuiCond.FirstUseEver);
         pushStyleColor(ImGuiCol.TitleBgActive, TITLE_BG_COLOR);
@@ -109,7 +101,7 @@ public class DebugConsole extends ImGuiElement implements MonoBehaviour {
         }
         ImGui.popStyleColor();
 
-        ImGui.text("Current Scene: " + context.getScene().getName());
+        ImGui.text("Current Scene: NULL");
         ImGui.sameLine();
         pushStyleColor(ImGuiCol.Text, MESSAGE_COLOR);
         ImGui.text("Enter 'HELP' for help.");
@@ -236,10 +228,16 @@ public class DebugConsole extends ImGuiElement implements MonoBehaviour {
             }
         history.add(command_line.toUpperCase(Locale.ROOT));
 
+        boolean commandFound = false;
         // Process command
         for(Command command : commands)
-            if(command_line.equalsIgnoreCase(command.getLabel()))
+            if(command_line.equalsIgnoreCase(command.getLabel())) {
                 command.getRunnable().run();
+                commandFound = true;
+            }
+
+        if(!commandFound)
+            info("Unknown command. Type 'help' for a list of available commands.");
 
         // On command input, we scroll to bottom even if AutoScroll==false
         ScrollToBottom = true;

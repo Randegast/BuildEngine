@@ -1,4 +1,4 @@
-package buildengine.imgui;
+package buildengine.editor.imgui;
 
 import buildengine.Window;
 import imgui.ImGui;

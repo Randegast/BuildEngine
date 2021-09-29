@@ -1,8 +1,8 @@
 package buildengine;
 
 import buildengine.core.Engine;
-import buildengine.imgui.ImGuiWindow;
-import buildengine.editor.Console;
+import buildengine.editor.imgui.ImGuiWindow;
+import buildengine.core.Console;
 import org.joml.Vector2i;
 import org.lwjgl.glfw.GLFW;
 

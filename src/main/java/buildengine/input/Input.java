@@ -14,13 +14,13 @@ public class Input {
     }
 
     public static void reset() {
-        mouse.reset();
-        keyboard.reset();
+        getMouse().reset();
+        getKeyboard().reset();
     }
 
     public static void pollEvents() {
-        mouse.pollEvents();
-        keyboard.pollEvents();
+        getMouse().pollEvents();
+        getKeyboard().pollEvents();
     }
 
     public static Mouse getMouse() {

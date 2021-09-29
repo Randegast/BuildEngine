@@ -1,20 +1,14 @@
-package buildengine.imgui.element;
+package buildengine.editor.imgui.element;
 
 import buildengine.core.scene.director.Renderer;
-import buildengine.imgui.ImGuiContext;
 import imgui.type.ImBoolean;
 
 public abstract class ImGuiElement implements Renderer {
 
-    protected ImGuiContext context;
     protected ImBoolean open = new ImBoolean();
 
-    public ImGuiContext getContext() {
-        return context;
-    }
-
-    public void setContext(ImGuiContext context) {
-        this.context = context;
+    public ImBoolean getOpen() {
+        return open;
     }
 
     public boolean isOpen() {

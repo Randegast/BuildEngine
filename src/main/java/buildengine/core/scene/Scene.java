@@ -1,16 +1,13 @@
 package buildengine.core.scene;
 
+import buildengine.core.Console;
 import buildengine.physics.CollisionRegisterer;
 import buildengine.physics.CollisionResolver;
 import buildengine.core.scene.director.Director;
 import buildengine.core.event.EventExecutor;
 import buildengine.core.scene.director.Loader;
 import buildengine.docs.NonNull;
-import buildengine.editor.DebugConsole;
 import buildengine.graphics.rendering.BatchRenderer;
-import buildengine.imgui.ImGuiContext;
-import buildengine.imgui.element.Debug;
-import buildengine.math.Transform;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -67,7 +64,7 @@ public class Scene implements Loader {
     @Override
     public void begin() {
         // Rendering
-        addDirector(new BatchRenderer(), new ImGuiContext(new Debug(), new DebugConsole()));
+        addDirector(new BatchRenderer());
         // Event handling
         addDirector(new EventExecutor());
         // Default collisions
@@ -163,8 +160,10 @@ public class Scene implements Loader {
     }
 
     public void addDirector(Director director) {
-        if(directors.contains(director))
-            throw new IllegalStateException("Tried to add multiple director instances of the same director type.");
+        if(getDirector(director.getClass()) != null) {
+            Console.warn("Tried to add multiple director instances of " + director.getClass().getSimpleName());
+            return;
+        }
         director.setScene(this);
         directors.add(director);
         Collections.sort(directors);

@@ -1,7 +1,7 @@
 package buildengine.core.scene;
 
+import buildengine.core.Console;
 import buildengine.math.Transform;
-import org.joml.Vector2f;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,11 +88,12 @@ public class Actor {
     /**
      * Adds an {@code ActorComponent} to this actor.
      * @param component the {@code ActorComponent} to be added.
-     * @throws IllegalStateException if the component is unique and this actor already contains an instance.
      */
     public void addComponent(ActorComponent component) {
-        if(getComponent(component.getClass()) != null)
-            throw new IllegalStateException("Tried to add multiple component instances of the same component type.");
+        if(getComponent(component.getClass()) != null) {
+            Console.warn("Tried to add multiple component instances of " + component.getClass().getSimpleName());
+            return;
+        }
         component.setOwner(this);
         components.add(component);
     }

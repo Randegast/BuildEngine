@@ -1,7 +1,6 @@
 package buildengine.core;
 
 import buildengine.Window;
-import buildengine.editor.Console;
 import buildengine.input.Input;
 import buildengine.time.Scheduler;
 import org.lwjgl.Version;
@@ -39,6 +38,8 @@ public class Engine {
 	 * The delta time variable. The time between each loop circle.
 	 */
 	private float deltaTime;
+
+	private boolean running;
 
 	/**
 	 * Initializes a newly created {@code Engine} object.
@@ -107,6 +108,7 @@ public class Engine {
 	 */
 	public void run() {
 
+		running = true;
 		initialize();
 
 		try {
@@ -116,7 +118,7 @@ public class Engine {
 			float accumulator = 0.0f;
 			float interval = 1f / FIXED_UPDATES_PER_SECOND;
 
-			while(!glfwWindowShouldClose(window.getId())) {
+			while(running && !glfwWindowShouldClose(window.getId())) {
 				// Updating
 				glfwPollEvents();
 
@@ -178,6 +180,10 @@ public class Engine {
 		oldStage.cleanUp();
 	}
 
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
+
 	// Getters and setters
 
 	/**
@@ -210,5 +216,13 @@ public class Engine {
 	 */
 	public float getDeltaTime() {
 		return deltaTime;
+	}
+
+	public boolean isRunning() {
+		return running;
+	}
+
+	public void stop() {
+		running = false;
 	}
 }

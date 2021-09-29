@@ -1,19 +1,17 @@
 package buildengine.editor;
 
-import buildengine.BuildEngine;
-import buildengine.Window;
-import buildengine.core.scene.Scene;
-import buildengine.imgui.ImGuiContext;
-import buildengine.imgui.ImGuiWindow;
+import buildengine.core.Engine;
+import buildengine.editor.imgui.ImGuiWindow;
+import org.joml.Vector2i;
 
 public class EditorLauncher {
 
+    public static final String VERSION = "0.1";
+    public static Engine engine;
+
     public static void main(String[] args) {
-        BuildEngine.create();
-
-        Scene editorScene = new Scene("Editor");
-        editorScene.addDirector(new ImGuiContext());
-
-        BuildEngine.getEngine().getStage().queueScene(editorScene);
+        engine = new Engine(new ImGuiWindow("BuildEngine Editor v" + VERSION, new Vector2i(1600, 900)));
+        engine.setStage(new Editor());
+        engine.getThread().start();
     }
 }
