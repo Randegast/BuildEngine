@@ -9,7 +9,7 @@ import buildengine.imgui.ImGuiWindow;
 public class EditorLauncher {
 
     public static void main(String[] args) {
-        BuildEngine.create(new ImGuiWindow("BuildEngine", Window.RESOLUTION_SD));
+        BuildEngine.create();
 
         Scene editorScene = new Scene("Editor");
         editorScene.addDirector(new ImGuiContext());

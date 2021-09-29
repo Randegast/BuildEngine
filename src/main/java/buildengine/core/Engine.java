@@ -5,21 +5,23 @@ import buildengine.editor.Console;
 import buildengine.input.Input;
 import buildengine.time.Scheduler;
 import org.lwjgl.Version;
-import org.lwjgl.opengl.GL11;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
 /**
- * This is the class containing the game_loop thread and all the
- * managing of the display, time and rendering.
- *
+ * An {@code Engine} is the root implementation of BuildEngine.
  * <p>
- *     Since version v1.0s don't create an instance of Engine.
- *     Instead use {@see BuildEngine.create()}.
+ *     The class contains all the root components of the game, like
+ *     the game loop {@code Thread} and the GLFW {@code Window} object.
+ *     It also contains the root for the ECS implementation: The {@code Stage} object.
  * </p>
- *
- * @author Kai v. Maurik
+ * <p>
+ *     The {@code run()} method contains the {@code while} loop. This loop updates and
+ *     renders the components.
+ * </p>
+ * @author Kai van Maurik
+ * @since 1.0
  */
 public class Engine {
 
@@ -33,16 +35,18 @@ public class Engine {
 
 	/** The current stage to be updated and rendered */
 	private Stage stage;
-
+	/**
+	 * The delta time variable. The time between each loop circle.
+	 */
 	private float deltaTime;
 
 	/**
-	 * Creates an engine instance.
-	 * @param window The window object the engine runs in
+	 * Initializes a newly created {@code Engine} object.
+	 * @param window The window object the engine uses.
 	 */
 	public Engine(Window window) {
 		this.window = window;
-		this.thread = new Thread(this::run, "game_loop");
+		this.thread = new Thread(this::run, "BuildEngine:MAIN");
 
 		stage = new Stage();
 	}
@@ -66,34 +70,35 @@ public class Engine {
 	}
 
 	/**
-	 * Game Loop
+	 * <h1>Game Loop</h1>
 	 *
 	 * Responsible for running the Engine and its components. This function consists of a total of 3 stages. One
 	 * before the game loop (the initialisation stage), the game loop and the clean up/exit stage.<br><br>
 	 *
-	 * This runnable function starts by calling all initialisation methods. Then thanks to an accumulator it runs
+	 * This function starts by calling all initialisation methods. Afterwards, thanks to an accumulator, it runs
 	 * a while loop in sync with the refresh rate of the window. The loop will only end when GLFW receives a request
 	 * for the window to close. This while loop consists of five stages as listed bellow.
-	 * <p>
+	 * <ul>
+	 * <li>
 	 *     The first part of the while loop runs all the logic of the engine. The input is gathered at the beginning.
 	 *     After that the stage (and scheduler) is being updated (fixed and constant).
-	 * </p>
-	 * <p>
+	 * </li>
+	 * <li>
 	 *     Secondly the rendering is being done. This simply means glClearing the color and depth buffers, and calling
 	 *     the render function of the current stage. All other render logic is the responsibility of the stage itself.
-	 * </p>
-	 * <p>
+	 * </li>
+	 * <li>
 	 *	   When we come to the third part the game logic and rendering is done and the input is being cleared in
 	 *	   preparation for the next circle, and the window buffer is swapped to show the updates.
-	 * </p>
-	 * <p>
+	 * </li>
+	 * <li>
 	 *     For the fourth part any potential OpenGL errors are being broadcast and shut down the program.
-	 *     TODO (Dev note) I don't actually know if I should crash the program. If you run into issues, let me know.
-	 * </p>
-	 * <p>
+	 * </li>
+	 * <li>
 	 *     The final part updates the time variables used to run the loop. This is handled last so the time reflects the
 	 *     duration of one loop, and not any delays caused by other threads.
-	 * </p>
+	 * </li>
+	 * </ul>
 	 * Finally, if the while loop gets broken out of the cleanup function of the current stage will be called and the
 	 * window will be terminated.
 	 *
@@ -132,7 +137,7 @@ public class Engine {
 				glfwSwapBuffers(window.getId());
 
 				// Error
-				int error = GL11.glGetError();
+				int error = glGetError();
 				if(error != GL_NO_ERROR)
 					throw new RuntimeException("OpenGL ran into an unexpected error. Error code: " + error);
 
@@ -146,7 +151,6 @@ public class Engine {
 		} catch (Exception e) {
 			// Error handling through console
 			Console.err("The main thread has run into an error: " + e);
-			Console.err("See crash dump for full error log.");
 			StackTraceElement[] trace = e.getStackTrace();
 			for (StackTraceElement traceElement : trace)
 				Console.err("\tat " + traceElement);
@@ -160,9 +164,8 @@ public class Engine {
 	 * Switches to a different stage. Formally that means first calling the {@code begin()} function of the given
 	 * stage, than actually changing the current stage. Finally, the old stage's {@code cleanUp()} function is being
 	 * called.
-	 *
-	 * This method provides no transition effects or load time like the {@code Scene} objects do, and thus this
-	 * should only be used outside game purposes.
+	 * @implNote This method provides no transition effects or load time like the {@link Stage#queueScene queueScene}
+	 * method does, and thus this should only be used outside game purposes.
 	 *
 	 * @param stage the new stage.
 	 */
@@ -177,18 +180,34 @@ public class Engine {
 
 	// Getters and setters
 
+	/**
+	 * Gets the current stage the engine is updating
+	 * @return the current {@code Stage} object.
+	 */
 	public Stage getStage() {
 		return stage;
 	}
 
+	/**
+	 * Gets the current thread the engine is running on
+	 * @return the current {@code Thread} object.
+	 */
 	public Thread getThread() {
 		return thread;
 	}
 
+	/**
+	 * Gets the current window the engine is rendering to
+	 * @return the current {@code Window} object.
+	 */
 	public Window getWindow() {
 		return window;
 	}
 
+	/**
+	 * Gets the time the last tick of the game loop took.
+	 * @return the delta time variable.
+	 */
 	public float getDeltaTime() {
 		return deltaTime;
 	}

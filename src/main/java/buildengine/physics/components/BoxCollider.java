@@ -1,8 +1,8 @@
-package buildengine.core.physics.components;
+package buildengine.physics.components;
 
-import buildengine.core.physics.CollideEvent;
-import buildengine.core.physics.Collision;
-import buildengine.core.physics.CollisionRegisterer;
+import buildengine.physics.CollideEvent;
+import buildengine.physics.Collision;
+import buildengine.physics.CollisionRegisterer;
 import buildengine.core.scene.ActorComponent;
 import buildengine.math.Transform;
 import buildengine.math.shape.Rectangle;

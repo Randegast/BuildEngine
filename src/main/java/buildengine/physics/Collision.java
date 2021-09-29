@@ -1,6 +1,6 @@
-package buildengine.core.physics;
+package buildengine.physics;
 
-import buildengine.core.physics.components.BoxCollider;
+import buildengine.physics.components.BoxCollider;
 import org.joml.Vector2f;
 
 /**

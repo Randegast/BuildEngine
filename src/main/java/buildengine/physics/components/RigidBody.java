@@ -1,4 +1,4 @@
-package buildengine.core.physics.components;
+package buildengine.physics.components;
 
 import buildengine.core.scene.ActorComponent;
 

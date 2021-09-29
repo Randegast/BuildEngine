@@ -27,7 +27,7 @@ public class Stage implements MonoBehaviour, Renderer {
     }
 
     /**
-     * Load a new stage. This stage will replace the old one. This methods
+     * Load a new stage. This stage will replace the old one. This method
      * creates the transition thread, in witch the old state is cleaned up
      * and the new state is initialized. After this process is complete it
      * switches states.
@@ -37,6 +37,7 @@ public class Stage implements MonoBehaviour, Renderer {
     public void queueScene(Scene newScene) {
         this.newScene = newScene;
     }
+
     private void loadNewScene() {
         cleanUp();
         scene = newScene;

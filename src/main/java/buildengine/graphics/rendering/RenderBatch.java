@@ -1,4 +1,4 @@
-package buildengine.core.rendering;
+package buildengine.graphics.rendering;
 
 import buildengine.core.scene.Actor;
 import buildengine.docs.NonNull;

@@ -1,11 +1,10 @@
-package buildengine.core.physics;
+package buildengine.physics;
 
-import buildengine.core.physics.components.BoxCollider;
-import buildengine.core.physics.components.RigidBody;
+import buildengine.physics.components.BoxCollider;
+import buildengine.physics.components.RigidBody;
 import buildengine.core.scene.director.Director;
 import buildengine.core.scene.director.ExecutionPhase;
 import buildengine.core.scene.director.MonoBehaviour;
-import buildengine.imgui.element.Debug;
 import org.joml.Vector2f;
 
 /**
@@ -29,7 +28,7 @@ public class CollisionResolver extends Director implements MonoBehaviour {
         if(registerer == null)
             return;
         registerer.registerCollisions();
-        for(RigidBody rigidBody : scene.getComponents(RigidBody.class))
+        for(RigidBody rigidBody : scene.getActiveComponents(RigidBody.class))
             resolveCollision(rigidBody);
     }
 

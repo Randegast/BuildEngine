@@ -1,6 +1,6 @@
-package buildengine.core.physics.components;
+package buildengine.physics.components;
 
-import buildengine.core.physics.CollideEvent;
+import buildengine.physics.CollideEvent;
 import buildengine.core.scene.ActorComponent;
 
 import java.util.ArrayList;

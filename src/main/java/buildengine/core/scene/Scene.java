@@ -1,12 +1,15 @@
 package buildengine.core.scene;
 
-import buildengine.core.physics.CollisionRegisterer;
-import buildengine.core.physics.CollisionResolver;
+import buildengine.physics.CollisionRegisterer;
+import buildengine.physics.CollisionResolver;
 import buildengine.core.scene.director.Director;
 import buildengine.core.event.EventExecutor;
 import buildengine.core.scene.director.Loader;
 import buildengine.docs.NonNull;
-import buildengine.core.rendering.BatchRenderer;
+import buildengine.editor.DebugConsole;
+import buildengine.graphics.rendering.BatchRenderer;
+import buildengine.imgui.ImGuiContext;
+import buildengine.imgui.element.Debug;
 import buildengine.math.Transform;
 
 import java.util.ArrayList;
@@ -25,22 +28,33 @@ import java.util.List;
  */
 public class Scene implements Loader {
 
-    // Scene
+    /** Name of the Scene */
     private final String name;
+    /**
+     * The list containing the Actors in the Scene
+     */
     private final List<Actor> actors;
+    /**
+     * The list containing the Directors in the Scene
+     */
     private final List<Director> directors;
-    private final Actor sceneActor;
 
+    /**
+     * Initialize a new {@code Scene} object, using "Unnamed" for the name.
+     */
     public Scene() {
         this("Unnamed");
     }
 
+    /**
+     * Initialize a new {@code Scene} object.
+     * @param name the name of the {@code Scene}; doesn't have to be unique.
+     */
     public Scene(String name) {
         this.name = name;
 
         actors = new ArrayList<>();
         directors = new ArrayList<>();
-        sceneActor = new Actor("SceneActor", new Transform());
     }
 
     // Scene
@@ -52,10 +66,12 @@ public class Scene implements Loader {
      */
     @Override
     public void begin() {
-        addActor(sceneActor);
-        addDirector(new BatchRenderer());
-        addDirector(new CollisionRegisterer(), new CollisionResolver());
+        // Rendering
+        addDirector(new BatchRenderer(), new ImGuiContext(new Debug(), new DebugConsole()));
+        // Event handling
         addDirector(new EventExecutor());
+        // Default collisions
+        addDirector(new CollisionRegisterer(), new CollisionResolver());
     }
 
     // Actors
@@ -106,15 +122,32 @@ public class Scene implements Loader {
     }
 
     /**
-     * List all ACTIVE components with type U
-     * @param classType The class of the component
-     * @param <U> The type of component
+     * List all ACTIVE components with type U.
+     * @param classType the class of the component.
+     * @param <U> the type of component.
+     * @return a list of all actor components in this scene of type U
+     */
+    @NonNull
+    public <U extends ActorComponent> List<U> getActiveComponents(Class<U> classType) {
+        List<U> list = new ArrayList<>();
+        for (Actor actor : getActiveActors()) {
+            U comp = actor.getComponent(classType);
+            if (comp != null)
+                list.add(comp);
+        }
+        return list;
+    }
+
+    /**
+     * List ALL components with type U. Including inactive ones.
+     * @param classType the class of the component.
+     * @param <U> the type of component.
      * @return a list of all actor components in this scene of type U
      */
     @NonNull
     public <U extends ActorComponent> List<U> getComponents(Class<U> classType) {
         List<U> list = new ArrayList<>();
-        for (Actor actor : getActiveActors()) {
+        for (Actor actor : getActors()) {
             U comp = actor.getComponent(classType);
             if (comp != null)
                 list.add(comp);
@@ -130,6 +163,8 @@ public class Scene implements Loader {
     }
 
     public void addDirector(Director director) {
+        if(directors.contains(director))
+            throw new IllegalStateException("Tried to add multiple director instances of the same director type.");
         director.setScene(this);
         directors.add(director);
         Collections.sort(directors);
@@ -156,10 +191,6 @@ public class Scene implements Loader {
 
     public String getName() {
         return name;
-    }
-
-    public Actor getSceneActor() {
-        return sceneActor;
     }
 
     @Override

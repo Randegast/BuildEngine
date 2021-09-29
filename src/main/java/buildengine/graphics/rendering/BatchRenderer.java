@@ -1,4 +1,4 @@
-package buildengine.core.rendering;
+package buildengine.graphics.rendering;
 
 import buildengine.BuildEngine;
 import buildengine.core.scene.director.Director;

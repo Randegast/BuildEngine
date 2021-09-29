@@ -1,12 +1,11 @@
-package buildengine.core.physics;
+package buildengine.physics;
 
 import buildengine.core.scene.director.Director;
 import buildengine.core.scene.director.ExecutionPhase;
 import buildengine.core.scene.director.MonoBehaviour;
-import buildengine.imgui.element.Debug;
 import buildengine.math.collision.Collisions;
 import buildengine.math.collision.Contact;
-import buildengine.core.physics.components.BoxCollider;
+import buildengine.physics.components.BoxCollider;
 import org.joml.Vector2f;
 
 /**
@@ -29,13 +28,13 @@ public class CollisionRegisterer extends Director implements MonoBehaviour {
     }
 
     public void registerCollisions() {
-        for(BoxCollider collider : scene.getComponents(BoxCollider.class))
+        for(BoxCollider collider : scene.getActiveComponents(BoxCollider.class))
             registerCollisions(collider);
     }
 
     private void registerCollisions(BoxCollider collider) {
         collider.getCollisions().clear();
-        for(BoxCollider other : scene.getComponents(BoxCollider.class)) {
+        for(BoxCollider other : scene.getActiveComponents(BoxCollider.class)) {
             if(collider == other)
                 continue;
             Contact contact = Collisions.compareRectangle(collider.getAbsoluteBounds(),

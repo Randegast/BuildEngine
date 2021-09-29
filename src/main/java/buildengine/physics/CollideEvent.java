@@ -1,4 +1,4 @@
-package buildengine.core.physics;
+package buildengine.physics;
 
 /**
  * Collision event handling

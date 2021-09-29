@@ -91,11 +91,12 @@ public class Window {
         glfwMakeContextCurrent(windowId);
         glfwSwapInterval(1); // enable vSync
 
+        // Create capabilities before showing window (showing window -> resizeCallBack -> glViewport)
+        GL.createCapabilities();
+
         // Reveling
         glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
         glfwShowWindow(windowId);
-
-        GL.createCapabilities();
     }
 
     /**
@@ -112,7 +113,8 @@ public class Window {
     }
 
     public static void resizeCallback(long window, int width, int height) {
-        GL12.glViewport(0, 0, width, height);
+        if(glfwGetCurrentContext() == window)
+            GL12.glViewport(0, 0, width, height);
         if(BuildEngine.getEngine().getWindow().getId() == window)
             BuildEngine.getEngine().getWindow().size.set(width, height);
         if(BuildEngine.getEngine().getStage() == null)
