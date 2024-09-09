@@ -10,7 +10,7 @@ import buildengine.math.vector.Vector2f;
 @Unstable
 public class Circle extends Shape {
 
-    protected float radius;
+    protected final float radius;
 
     public Circle(float radius) {
         super(new Vector2f(), radius * 2);

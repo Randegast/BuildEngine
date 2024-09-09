@@ -138,11 +138,11 @@ public class Sprite extends ActorComponent {
         return new Vector2f(width, height);
     }
 
-    public int getzIndex() {
+    public int getZIndex() {
         return zIndex;
     }
 
-    public void setzIndex(int zIndex) {
+    public void setZIndex(int zIndex) {
         this.zIndex = zIndex;
     }
 

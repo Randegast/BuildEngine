@@ -193,6 +193,7 @@ public class Vector2f {
         return (float) Math.atan2(y, x);
     }
 
+    @SuppressWarnings("SuspiciousNameCombination")
     public Vector2f getPerpendicular() {
         return new Vector2f(-y,  x);
     }
@@ -236,7 +237,8 @@ public class Vector2f {
 
     @Override
     public boolean equals(Object o) {
-        if(o instanceof Vector2f v) {
+        if(o instanceof Vector2f) {
+            Vector2f v = (Vector2f) o;
             return v.x == x && v.y == y;
         }
         return false;
@@ -247,8 +249,7 @@ public class Vector2f {
         return x + "," + y;
     }
 
-    @Override
-    public Vector2f clone() {
+    public Vector2f duplicate() {
         return new Vector2f(x, y);
     }
 }

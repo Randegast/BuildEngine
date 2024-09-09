@@ -62,7 +62,7 @@ public class ConfigurationFile {
         if(!file.exists()) {
             try {
                 if (!file.createNewFile())
-                    // idk how you ever end up here...
+                    // IDK how you ever end up here...
                     throw new IllegalStateException("The DataFile " + file.getName() +
                             " no longer exists, and creating a new one failed because it already exist.");
             } catch (IOException e) {

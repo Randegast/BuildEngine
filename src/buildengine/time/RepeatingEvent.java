@@ -25,6 +25,7 @@ public class RepeatingEvent extends Event {
 
     public void restart(long interval) {
         if(interval <= 0)
+            //noinspection UnusedAssignment
             paused = true;
 
         this.timer = interval;

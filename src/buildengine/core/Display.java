@@ -75,7 +75,7 @@ public class Display extends JFrame {
 		setUndecorated(borderless);
 		
 		// IconImage
-		List<Image> icon = new ArrayList<Image>();
+		List<Image> icon = new ArrayList<>();
 		icon.add(AssetManager.getImage("src/buildengine/logo20x20.png"));
 		setIconImages(icon);
 

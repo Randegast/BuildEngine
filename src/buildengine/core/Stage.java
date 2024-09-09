@@ -9,7 +9,6 @@ import buildengine.core.scene.director.Renderer;
 import buildengine.graphics.Draw;
 import buildengine.graphics.renderer.TransitionRenderer;
 import buildengine.input.Input;
-import buildengine.math.vector.Vector2f;
 
 import java.awt.*;
 
@@ -53,7 +52,7 @@ public class Stage implements MonoBehaviour, Renderer {
     }
 
     /**
-     * Load a new stage. This stage will replace the old one. This methods
+     * Load a new stage. This stage will replace the old one. This method
      * creates the transition thread, in witch the old state is cleaned up
      * and the new state is initialized. After this process is complete it
      * switches states.

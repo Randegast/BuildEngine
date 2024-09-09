@@ -2,7 +2,7 @@ package buildengine.time;
 
 public abstract class Event {
 
-    protected Runnable action;
+    protected final Runnable action;
     protected boolean destroyed;
 
     public Event(Runnable action) {

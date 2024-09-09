@@ -23,7 +23,7 @@ public class SAT {
      * @param a The first polygon
      * @param b The second polygon
      * @return  A contact object if there is collision containing the collision
-     *          information. Otherwise returns {@code null}.
+     *          information. Otherwise, returns {@code null}.
      */
     public static Contact collidePolygons(Polygon a, Polygon b) {
         // Collision data
@@ -46,9 +46,9 @@ public class SAT {
             double pen = Math.abs(overlap);
             // Containment
             if(p0.contains(p1) || p1.contains(p0)) {
-                double mins = Math.abs(p0.x - p1.x);
-                double maxs = Math.abs(p0.y - p1.y);
-                pen += Math.min(mins, maxs);
+                double min = Math.abs(p0.x - p1.x);
+                double max = Math.abs(p0.y - p1.y);
+                pen += Math.min(min, max);
             }
             // Data Collect
             if(pen < penetration) {
@@ -64,7 +64,7 @@ public class SAT {
      * @param a The polygon
      * @param v The point
      * @return  A contact object if there is collision containing the collision
-     *          information. Otherwise returns {@code null}.
+     *          information. Otherwise, returns {@code null}.
      */
     public static Contact containsPoint(Polygon a, Vector2f v) {
         // Collision data
@@ -97,7 +97,7 @@ public class SAT {
      */
     public static class Projection {
 
-        public double x, y;
+        public final double x, y;
 
         public Projection(double min, double max) {
             x = min;

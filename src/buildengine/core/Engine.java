@@ -22,7 +22,7 @@ import java.awt.image.BufferStrategy;
  */
 public class Engine implements Runnable {
 
-	public static float DEFAULT_FPS = 63, DEFAULT_FIXED_UPDATES_PER_SECOND = 60;
+	public static final float DEFAULT_FPS = 63, DEFAULT_FIXED_UPDATES_PER_SECOND = 60;
 	private static final int BUFFER_COUNT = 2;
 
 	// Run settings
@@ -144,11 +144,11 @@ public class Engine implements Runnable {
 
 	/**
 	 * Switches to a different stage. Formally that means first calling the {@code begin()} function of the given
-	 * stage, than actually changing the current stage. Finally the old stage's {@code cleanUp()} function is being
+	 * stage, than actually changing the current stage. Finally, the old stage's {@code cleanUp()} function is being
 	 * called.
-	 *
+	 * <p>
 	 * This method provides no transition effects or load time like the {@code Scene} objects do, and thus this
-	 * should only be used outside of game purposes.
+	 * should only be used outside game purposes.
 	 *
 	 * @param stage the new stage.
 	 */

@@ -105,11 +105,12 @@ public class Transform {
 	}
 
 	public void setSize(Vector2f size) {
-		this.size = size;
+		setSize(size.x, size.y);
 	}
 
 	public void setSize(float width, float height) {
-		setSize(width, height);
+		size.x = width;
+		size.y = height;
 	}
 
 	public float getRotation() {
@@ -136,14 +137,14 @@ public class Transform {
 
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof Transform b) {
-			return position.equals(b.getPosition()) && size.equals(b.getSize()) && rotation == b.getRotation();
+		if(obj instanceof Transform) {
+            Transform b = (Transform) obj;
+            return position.equals(b.getPosition()) && size.equals(b.getSize()) && rotation == b.getRotation();
 		}
 		return false;
 	}
 
-	@Override
-	public Transform clone() {
-		return new Transform(position, size, rotation);
+	public Transform duplicate() {
+        return new Transform(position, size, rotation);
 	}
 }

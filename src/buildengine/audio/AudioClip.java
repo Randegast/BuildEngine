@@ -56,8 +56,7 @@ public class AudioClip {
 	public void setVolume(double amt0_1) {
 		FloatControl gainControl = (FloatControl) clip
 		        .getControl(FloatControl.Type.MASTER_GAIN);
-		    double gain = amt0_1;
-		    float dB = (float) (Math.log(gain) / Math.log(10.0) * 20.0);
+        float dB = (float) (Math.log(amt0_1) / Math.log(10.0) * 20.0);
 		    gainControl.setValue(dB);
 	}
 	

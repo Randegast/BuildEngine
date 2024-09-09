@@ -13,8 +13,8 @@ public class SpriteLoader {
     private SpriteLoader() {}
 
     /**
-     * Loads spritesheet from an image
-     * @param imagePath The image file containing the spritesheet
+     * Loads sprite sheet from an image
+     * @param imagePath The image file containing the sprite sheet
      * @param width     The width of one frame
      * @param height    The height of one frame
      * @return A new BufferedImage array object

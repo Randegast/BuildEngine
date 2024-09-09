@@ -28,7 +28,7 @@ public class Scene implements Loader {
 
     // Scene
     /** Name of the Scene */
-    public String name;
+    public final String name;
     /**
      * The list containing the Actors in the Scene
      */

@@ -9,6 +9,7 @@ import java.awt.*;
  */
 public class BuildEngine {
 
+    @SuppressWarnings("unused")
     private BuildEngine() {}
 
     /** Version: [major].[minor][extra] */

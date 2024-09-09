@@ -52,7 +52,7 @@ public class Draw {
     /**
      * The Unit is the coordinate system.
      * This Vector2 object holds the information how
-     * to interpret this units and how many pixels
+     * to interpret these units and how many pixels
      * one unit is.
      *
      * @see #resize(Dimension)
@@ -62,7 +62,7 @@ public class Draw {
     private static Vector2f unit;
 
     /**
-     * The transforms decides how the pixels are drawn
+     * The transform decides how the pixels are drawn
      * to the screen, and applies transformations before
      * drawing. Use the transform methods to alter this.
      * Directly altering it can have bad results.
@@ -491,7 +491,7 @@ public class Draw {
      * Gets the Unit size of a specified string.
      * @param font      The font the string is in
      * @param string    The string width to be calculated
-     * @return A Vector2f representing with the X value being the string width,
+     * @return A Vector representing with the X value being the string width,
      *         and Y value being the height of the font in Units.
      */
     public static Vector2f getStringSize(Font font, String string) {
@@ -544,7 +544,7 @@ public class Draw {
      * @return a copy of the current Transform object
      */
     public static Transform getTransform() {
-        return transform.clone();
+        return transform.duplicate();
     }
 
     public static Graphics2D getGraphics() {

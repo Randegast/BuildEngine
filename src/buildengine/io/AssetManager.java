@@ -2,7 +2,6 @@ package buildengine.io;
 
 import buildengine.audio.AudioClip;
 import buildengine.audio.SoundEffect;
-import buildengine.graphics.renderer.Animation;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -26,7 +25,7 @@ public class AssetManager {
 
     /**
      * Gets an image, either from cache by name, or from disk by path.
-     * @param path The name of the pre-loaded image, or the path to the newly loaded image.
+     * @param path The name of the preloaded image, or the path to the newly loaded image.
      */
     public static BufferedImage getImage(String path) {
         if(!images.containsKey(path))
@@ -36,7 +35,7 @@ public class AssetManager {
 
     /**
      * Gets an audio clip, either from cache by name, or from disk by path.
-     * @param path The name of the pre-loaded audio clip, or the path to the newly loaded audio clip.
+     * @param path The name of the preloaded audio clip, or the path to the newly loaded audio clip.
      */
     public static AudioClip getAudio(String path) {
         if(!audio.containsKey(path))

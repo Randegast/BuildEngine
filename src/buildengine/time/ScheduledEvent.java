@@ -4,8 +4,7 @@ public class ScheduledEvent extends Event {
 
 	private long timer;
 
-	private long lastTime;
-	private long currentTime;
+    private long currentTime;
 
 	/**
 	 * Create a new scheduled event
@@ -22,7 +21,7 @@ public class ScheduledEvent extends Event {
 	public void update() {
 		if(destroyed)
 			return;
-		lastTime = currentTime;
+        long lastTime = currentTime;
 		currentTime = System.currentTimeMillis();
 		timer -= currentTime - lastTime;
 		if(timer <= 0) {

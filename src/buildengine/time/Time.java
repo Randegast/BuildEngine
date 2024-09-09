@@ -12,8 +12,7 @@ public class Time {
 	private static List<Event> events;
 	private static List<Event> queue;
 	private long lastTime;
-	private long currentTime;
-	private long totalTime;
+    private long totalTime;
 	
 	private boolean paused;
 	
@@ -32,7 +31,7 @@ public class Time {
 	}
 	
 	public void update() {
-		currentTime = System.currentTimeMillis();
+        long currentTime = System.currentTimeMillis();
 		totalTime += currentTime - lastTime;
 		lastTime = currentTime;
 		if(paused)

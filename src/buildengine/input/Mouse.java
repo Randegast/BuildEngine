@@ -2,7 +2,6 @@ package buildengine.input;
 
 import buildengine.BuildEngine;
 import buildengine.core.Debug;
-import buildengine.core.scene.Scene;
 import buildengine.graphics.Draw;
 import buildengine.math.vector.Vector2f;
 import buildengine.math.vector.Vector2i;
@@ -101,12 +100,11 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	 * @return the current mouse position (pixels)
 	 */
 	public Vector2i getScreenPosition() {
-		return position.clone();
+		return position.duplicate();
 	}
 
 	/**
 	 * Gets the cursor position in Draw units. Remember: Draw is static and doesn't take a scene camera intro account.
-	 * @see Scene#getMousePosition() for the position of the cursor in the scene
 	 * @see #getScreenPosition() for exact camera pixel position
 	 * @return The cursor position relative to the stage.
 	 */

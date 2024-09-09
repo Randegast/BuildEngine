@@ -184,6 +184,7 @@ public class Vector2i {
         return (int) Math.atan2(y, x);
     }
 
+    @SuppressWarnings("SuspiciousNameCombination")
     public Vector2i getPerpendicular() {
         return new Vector2i(-y,  x);
     }
@@ -227,7 +228,8 @@ public class Vector2i {
 
     @Override
     public boolean equals(Object o) {
-        if(o instanceof Vector2i v) {
+        if(o instanceof Vector2i) {
+            Vector2i v = (Vector2i) o;
             return v.x == x && v.y == y;
         }
         return false;
@@ -238,8 +240,7 @@ public class Vector2i {
         return x + "," + y;
     }
 
-    @Override
-    public Vector2i clone() {
+    public Vector2i duplicate() {
         return new Vector2i(x, y);
     }
 }

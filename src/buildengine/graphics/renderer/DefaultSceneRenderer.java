@@ -41,12 +41,12 @@ public class DefaultSceneRenderer extends SceneRenderer {
         Actor[] out_actorArray = getDrawableActors().toArray(new Actor[0]);
         bubbleSort(out_actorArray);
         for(Actor actor : out_actorArray) {
-            if(sprites.containsKey(actor.getSprite().getzIndex()))
-                sprites.get(actor.getSprite().getzIndex()).add(actor.getSprite());
+            if(sprites.containsKey(actor.getSprite().getZIndex()))
+                sprites.get(actor.getSprite().getZIndex()).add(actor.getSprite());
             else {
                 ArrayList<Sprite> spriteArrayList = new ArrayList<>();
                 spriteArrayList.add(actor.getSprite());
-                sprites.put(actor.getSprite().getzIndex(), spriteArrayList);
+                sprites.put(actor.getSprite().getZIndex(), spriteArrayList);
             }
         }
 
@@ -70,8 +70,8 @@ public class DefaultSceneRenderer extends SceneRenderer {
         while(!sorted) {
             sorted = true;
             for (int i = 0; i < a.length - 1; i++) {
-                if (a[i].getSprite().getzIndex()
-                        > a[i+1].getSprite().getzIndex()) {
+                if (a[i].getSprite().getZIndex()
+                        > a[i+1].getSprite().getZIndex()) {
                     temp = a[i];
                     a[i] = a[i+1];
                     a[i+1] = temp;

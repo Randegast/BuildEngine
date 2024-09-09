@@ -52,11 +52,11 @@ public class MathUtils {
 	 */
 	public static double min(double... numbers) {
 		double smallest = Double.MAX_VALUE;
-		for(int i =0;i<numbers.length;i++) {
-			if(smallest > numbers[i]) {
-				smallest = numbers[i];
-			}
-		}
+        for (double number : numbers) {
+            if (smallest > number) {
+                smallest = number;
+            }
+        }
 		return smallest;
 	}
 
@@ -68,11 +68,11 @@ public class MathUtils {
 	public static double max(double... numbers) {
 		double biggest = Double.MIN_VALUE;
 
-		for(int i =0;i<numbers.length;i++) {
-			if(biggest < numbers[i]) {
-				biggest = numbers[i];
-			}
-		}
+        for (double number : numbers) {
+            if (biggest < number) {
+                biggest = number;
+            }
+        }
 
 		return biggest;
 	}
