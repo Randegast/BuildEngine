@@ -51,7 +51,7 @@ public class CollisionCorrectionDirector extends Director implements MonoBehavio
                 if(otherBody == null)
                     return;
                 float correction = otherBody.isImmovable() ? 1f : 0.5f;
-                displacement.add(collisionData.getContact().getNormal().clone().mul(collisionData.getContact().getPenetration() * correction));
+                displacement.add(collisionData.getContact().getNormal().duplicate().mul(collisionData.getContact().getPenetration() * correction));
             }
             actor.getTransform().getPosition().add(displacement);
         }
